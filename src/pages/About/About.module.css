@@ -1,0 +1,33 @@
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing);
+  margin: var(--spacing);
+}
+.left {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.portrait {
+  width: 40%; border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: var(--spacing);
+}
+.text { width: 50%; 
+font-size: 20px;
+margin-left: var(--spacing);}
+.right {
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap:15px;
+  align-items: center;
+  justify-content: center;
+}

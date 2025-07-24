@@ -1,0 +1,13 @@
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: var(--spacing); background: var(--header-bg);
+}
+.controls {
+  display: flex; gap: var(--spacing-sm);
+}
+.controls button,
+.controls select {
+  padding: 0.3rem; border-radius: 4px; border: 1px solid var(--text);
+  background: var(--cream); cursor: pointer;
+}
+.controls select { appearance: none; }
