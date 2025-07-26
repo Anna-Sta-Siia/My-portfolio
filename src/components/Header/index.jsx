@@ -1,39 +1,42 @@
-// src/components/Header/index.jsx
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setTheme, setLanguage } from '../../features/ui/uiSlice';
+import { useUI } from '../../context/UIContext';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
+import Menu from '../Menu';
+
 
 export default function Header() {
-  const dispatch = useDispatch();
-  const theme    = useSelector(s => s.ui.theme);
-  const lang     = useSelector(s => s.ui.language);
+  // récupère theme/lang + setters
+  const { theme, setTheme, language, setLanguage } = useUI();
 
   return (
     <header className={styles.header}>
-      {/* Logo cliquable */}
-      <Link to="/" className={`${styles.logo} logo`}>Anastasia Girard</Link>
-
+      <Link to="/" className={`${styles.logo} logo`}>
+        Anastasia Girard
+      </Link>
+      <Menu/>
       <div className={styles.controls}>
-        {/* Toggle thème */}
         <button
-          onClick={() => dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))}
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           aria-label="Toggle theme"
         >
           {theme === 'light' ? '🌙' : '☀️'}
         </button>
 
-        {/* Sélecteur de langue */}
         <select
-          value={lang}
-          onChange={e => dispatch(setLanguage(e.target.value))}
+          value={language}
+          onChange={e => setLanguage(e.target.value)}
           aria-label="Select language"
+          className={styles.option}
         >
           <option value="en">EN</option>
           <option value="fr">FR</option>
           <option value="ru">RU</option>
         </select>
+        <button>
+          <Link to="/cv" className={`${styles.logo} logo`} >
+        CV
+      </Link>
+        </button>
       </div>
     </header>
   );

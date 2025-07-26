@@ -3,7 +3,8 @@
   padding: var(--spacing); background: var(--header-bg);
 }
 .controls {
-  display: flex; gap: var(--spacing-sm);
+  display: flex;
+  flex-wrap: wrap;justify-content: center;gap: 5px;
 }
 .controls button,
 .controls select {
@@ -11,3 +12,7 @@
   background: var(--cream); cursor: pointer;
 }
 .controls select { appearance: none; }
+.option{
+  font-size: 26px;
+  font-family: var(--logo-font);
+}

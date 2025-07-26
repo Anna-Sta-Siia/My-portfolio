@@ -1,40 +1,58 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import Header       from './components/Header';
-import Footer       from './components/Footer';
-
-import About        from './pages/About';
-import Projects     from './pages/Projects';
-import Services     from './pages/Services';
-import Skills       from './pages/Skills';
-import Formation    from './pages/Formation';
-import Contact      from './pages/Contact';
-import NotFound     from './pages/NotFound';
+import MatryoshkaLoader from './components/MatryoshkaLoader';
+import MedallionReveal from './components/MedallionReveal';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import About from './pages/About';
+import Projects from './pages/Projects';
+import Services from './pages/Services';
+import Formation from './pages/Formation';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+import CV from './pages/CV';
 
 export default function App() {
+  const [phase, setPhase] = useState('matryoshka'); // 'matryoshka' → 'medallion' → 'app'
+
+  const handleMatryoshkaEnd = () => setPhase('medallion');
+  const handleMedallionEnd = () => setPhase('app');
+
   return (
     <BrowserRouter>
-      <Header />
+      {phase === 'matryoshka' && (
+        <MatryoshkaLoader onComplete={handleMatryoshkaEnd} />
+      )}
 
-      <main>
-        <Routes>
-          {/* Главная и About */}
-          <Route index            element={<About />} />
-          <Route path="/about"    element={<About />} />
+      {phase === 'medallion' && (
+        <MedallionReveal onFinish={handleMedallionEnd} />
+      )}
 
-          {/* Остальные страницы */}
-          <Route path="/projects"  element={<Projects />} />
-          <Route path="/services"  element={<Services />} />
-          <Route path="/skills"    element={<Skills />} />
-          <Route path="/formation" element={<Formation />} />
-          <Route path="/contact"   element={<Contact />} />
-
-          {/* 404 */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-
-      <Footer />
+      <AnimatePresence>
+        {phase === 'app' && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: 'easeOut' }}
+          >
+            <Header />
+            <main>
+              <Routes>
+                <Route index element={<About />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/formation" element={<Formation />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/cv" element={<CV />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </BrowserRouter>
-);
+  );
 }
