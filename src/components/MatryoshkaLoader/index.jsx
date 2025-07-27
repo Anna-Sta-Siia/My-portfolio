@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import styles from './MatryoshkaLoader.module.css';
 
-import full from '../../assets/matreshka.png';
-import top from '../../assets/matreshka_top.png';
-import bottom from '../../assets/matreshka_bottom.png';
+import full from '../../assets/images/matreshka.png';
+import top from '../../assets/images/matreshka_top.png';
+import bottom from '../../assets/images/matreshka_bottom.png';
 
 export default function MatryoshkaLoader({ onComplete }) {
   const [phase, setPhase] = useState('full'); // 'full', 'rotating', 'split'

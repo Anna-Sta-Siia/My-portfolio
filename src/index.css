@@ -26,7 +26,7 @@ body {
 
   /* Fond clair + motif Gzhel */
   --bg-color:   #ffffff;
-  --bg-img: url('./assets/gzhel-pattern.png');
+  --bg-img: url('./assets/images/gzhel-pattern.png');
 
   /* Header / footer */
   --header-bg:  var(--cream);
@@ -42,7 +42,7 @@ body {
 
   /* Fond sombre + motif Khokhloma */
   --bg-color:   #1e1e1e;
-  --bg-img: url('./assets/khokhloma-pattern.png');
+  --bg-img: url('./assets/images/khokhloma-pattern.png');
 }
 
 /* 5. Utilitaires globales */

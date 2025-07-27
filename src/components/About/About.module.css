@@ -1,0 +1,40 @@
+.about { width: 45%; 
+    margin: var(--spacing) var(--spacing) var(--spacing) 0;
+    background-color: white;
+    aspect-ratio: 0.67;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    right: 0;
+    z-index: 1;
+}
+.about h2{
+  text-align: center;
+  padding: 10% 0 3% 0;
+  font-weight: bold;
+}
+.about p{
+  text-align: center;
+  padding: 4% 16% 0 16% ;
+}
+/* ≥ 768px → 18px */
+@media (min-width: 768px) {
+  .about p, .text h2 {
+    font-size: 20px;}
+}
+/* ≥ 875px → 20px */
+@media (min-width: 875px) {
+  .about p, .text h2 {
+    font-size: 23px;}
+}
+/* ≥ 1024px → 24px */
+@media (min-width: 1024px) {
+  .about p, .text h2 {
+    font-size: 28px;
+  }
+}
+@media (min-width: 1240px) {
+  .about p, .text h2 {
+    font-size: 33px;
+  }
+}

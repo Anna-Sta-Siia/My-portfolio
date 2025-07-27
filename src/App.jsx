@@ -6,7 +6,7 @@ import MatryoshkaLoader from './components/MatryoshkaLoader';
 import MedallionReveal from './components/MedallionReveal';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import About from './pages/About';
+import Accueil from './pages/Accueil';
 import Projects from './pages/Projects';
 import Services from './pages/Services';
 import Formation from './pages/Formation';
@@ -40,7 +40,7 @@ export default function App() {
             <Header />
             <main>
               <Routes>
-                <Route index element={<About />} />
+                <Route index element={<Accueil />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/formation" element={<Formation />} />
