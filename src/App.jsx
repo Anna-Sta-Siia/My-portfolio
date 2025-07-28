@@ -14,13 +14,21 @@ import NotFound from './pages/NotFound';
 import CV from './pages/CV';
 
 export default function App() {
+  const hasPlayedOnce = sessionStorage.getItem('hasPlayedOnce') === 'true';
   const [phase, setPhase] = useState('matryoshka');
 
   const handleMatryoshkaEnd = () => {
-    setTimeout(() => setPhase('medallion'), 500);
+    setTimeout(() => {
+      if (hasPlayedOnce) {
+        setPhase('app');
+      } else {
+        setPhase('medallion');
+      }
+    }, 500);
   };
 
   const handleMedallionEnd = () => {
+    sessionStorage.setItem('hasPlayedOnce', 'true');
     setPhase('app');
   };
 

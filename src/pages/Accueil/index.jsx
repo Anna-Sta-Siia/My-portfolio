@@ -15,29 +15,31 @@ export default function Accueil({ phase, onFinish }) {
   const { language } = useUI();
   const [flipped, setFlipped] = useState(false);
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
-
   const translations = { fr: aboutFr, en: aboutEn, ru: aboutRu };
   const about = translations[language] || aboutEn;
 
-
   useEffect(() => {
-    const hasPlayed = sessionStorage.getItem('hasPlayedOnce') === 'true';
-    setHasPlayedOnce(hasPlayed);
+  const alreadyPlayed = sessionStorage.getItem('hasPlayedOnce') === 'true';
+  setHasPlayedOnce(alreadyPlayed);
 
-    if (phase === 'medallion' && !hasPlayed) {
-      setTimeout(() => setFlipped(true), 500);
-      setTimeout(() => {
-        onFinish?.();
-        setHasPlayedOnce(true);
-        sessionStorage.setItem('hasPlayedOnce', 'true');
-      }, 2500);
-    } else if (phase === 'medallion') {
+  if (phase === 'medallion' && !alreadyPlayed) {
+    setTimeout(() => setFlipped(true), 500);
+    setTimeout(() => {
       onFinish?.();
-    }
-  }, [phase, onFinish]);
+      setHasPlayedOnce(true);
+      sessionStorage.setItem('hasPlayedOnce', 'true');
+    }, 2500);
+  } else if (phase === 'medallion' && alreadyPlayed) {
+    onFinish?.(); // уже проиграно — не повторять
+  }
+}, [phase, onFinish]);
 
-  const rotateY = (phase === 'app' || hasPlayedOnce) ? -180 : flipped ? -180 : 0;
-
+const rotateY =
+  phase === 'app' || hasPlayedOnce
+    ? -180
+    : flipped
+    ? -180
+    : 0;
   return (
     <section className={styles.accueil}>
       <motion.div

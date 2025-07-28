@@ -17,7 +17,11 @@ export default function About() {
   return(
         <div className={styles.about}>
           <h2>{title}</h2>
-        {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+        {paragraphs.map((p, i) => (
+  <p key={i} className={i === 0 ? styles.first : ''}>
+    {p}
+  </p>
+))}
         </div>
   );
 }
