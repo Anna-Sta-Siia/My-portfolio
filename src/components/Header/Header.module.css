@@ -1,6 +1,7 @@
 .header {
   display: flex; justify-content: space-between; align-items: center;
-  padding: var(--spacing); background: var(--header-bg);
+  padding: var(--spacing); 
+  background: var(--header-bg);
 }
 .controls {
   display: flex;
@@ -15,4 +16,21 @@
 .option{
   font-size: 26px;
   font-family: var(--logo-font);
+}
+.themeButton {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.icon:hover {
+  transform: rotate(10deg) scale(1.1);
 }

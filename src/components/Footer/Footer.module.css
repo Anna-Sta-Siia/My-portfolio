@@ -5,3 +5,6 @@
   padding: var(--spacing);
   font-size: 20px;
 }
+.footerbutton{
+  background-color: greenyellow;
+}
