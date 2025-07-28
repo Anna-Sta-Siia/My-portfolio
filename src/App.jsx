@@ -3,9 +3,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import MatryoshkaLoader from './components/MatryoshkaLoader';
-import MedallionReveal from './components/MedallionReveal';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Layout from './components/Layout';
+
 import Accueil from './pages/Accueil';
 import Projects from './pages/Projects';
 import Services from './pages/Services';
@@ -15,41 +14,38 @@ import NotFound from './pages/NotFound';
 import CV from './pages/CV';
 
 export default function App() {
-  const [phase, setPhase] = useState('matryoshka'); // 'matryoshka' → 'medallion' → 'app'
+  const [phase, setPhase] = useState('matryoshka');
 
-  const handleMatryoshkaEnd = () => setPhase('medallion');
-  const handleMedallionEnd = () => setPhase('app');
+  const handleMatryoshkaEnd = () => {
+    setTimeout(() => setPhase('medallion'), 500);
+  };
+
+  const handleMedallionEnd = () => {
+    setPhase('app');
+  };
 
   return (
     <BrowserRouter>
-      {phase === 'matryoshka' && (
-        <MatryoshkaLoader onComplete={handleMatryoshkaEnd} />
-      )}
-
-      {phase === 'medallion' && (
-        <MedallionReveal onFinish={handleMedallionEnd} />
-      )}
+      {phase === 'matryoshka' && <MatryoshkaLoader onComplete={handleMatryoshkaEnd} />}
 
       <AnimatePresence>
-        {phase === 'app' && (
+        {phase !== 'matryoshka' && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2 }}
           >
-            <Header />
-            <main>
-              <Routes>
-                <Route index element={<Accueil />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/formation" element={<Formation />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/cv" element={<CV />} />
+            <Routes>
+              <Route path="/" element={<Layout phase={phase} />}>
+                <Route index element={<Accueil phase={phase} onFinish={handleMedallionEnd} />} />
+                <Route path="projects" element={<Projects />} />
+                <Route path="services" element={<Services />} />
+                <Route path="formation" element={<Formation />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="cv" element={<CV />} />
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-            <Footer />
+              </Route>
+            </Routes>
           </motion.div>
         )}
       </AnimatePresence>

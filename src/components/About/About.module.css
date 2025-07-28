@@ -1,5 +1,5 @@
 .about { width: 45%; 
-    margin: var(--spacing) var(--spacing) var(--spacing) 0;
+flex:1;
     background-color: white;
     aspect-ratio: 0.67;
     border-radius: 50%;
