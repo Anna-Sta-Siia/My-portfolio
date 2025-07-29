@@ -20,13 +20,21 @@
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE */
+  overflow: hidden;
   flex: 1;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade {
+  opacity: 0;
 }
 
 .slider::-webkit-scrollbar {
   display: none;
+}
+
+.slider {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }

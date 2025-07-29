@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useUI } from '../../context/UIContext';
 import Petal from '../Petal';
 import styles from './Menu.module.css';
@@ -22,30 +22,51 @@ const items = [
 export default function Menu() {
   const { language } = useUI();
   const translated = labels[language] || labels.en;
-  const sliderRef = useRef();
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(false);
+  const visibleCount = 3;
 
-  const scroll = (direction) => {
-    const scrollAmount = sliderRef.current.offsetWidth / 2;
-    sliderRef.current.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth',
-    });
+  const handleScroll = (direction) => {
+    setFade(true);
+    setTimeout(() => {
+      setIndex((prev) =>
+        direction === 'right'
+          ? (prev + 1) % items.length
+          : (prev - 1 + items.length) % items.length
+      );
+      setFade(false);
+    }, 300);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(true);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % items.length);
+        setFade(false);
+      }, 300);
+    }, 5000); // toutes les 5 secondes
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
-      <button className={styles.arrow} onClick={() => scroll('left')}>◀</button>
-      <div className={styles.slider} ref={sliderRef}>
-        {items.map(({ key, path, color }) => (
-          <Petal
-            key={key}
-            name={translated[key] || key}
-            path={path}
-            color={color}
-          />
-        ))}
+      <button className={styles.arrow} onClick={() => handleScroll('left')}>◀</button>
+      <div className={`${styles.slider} ${fade ? styles.fade : ''}`}>
+        {Array(visibleCount).fill(0).map((_, i) => {
+          const item = items[(index + i) % items.length];
+          return (
+            <Petal
+              key={item.key}
+              name={translated[item.key] || item.key}
+              path={item.path}
+              color={item.color}
+            />
+          );
+        })}
       </div>
-      <button className={styles.arrow} onClick={() => scroll('right')}>▶</button>
+      <button className={styles.arrow} onClick={() => handleScroll('right')}>▶</button>
     </div>
   );
 }
