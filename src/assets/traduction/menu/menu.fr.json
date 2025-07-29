@@ -3,5 +3,7 @@
   "services": "Services",
   "formation": "Formation",
   "contact": "Contact",
-  "cv": "CV"
+  "cv": "CV",
+  "linkedin": "LinkedIn",
+  "github": "GitHub"
 }

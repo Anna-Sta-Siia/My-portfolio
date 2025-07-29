@@ -1,3 +1,32 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
 
-.nav{display: flex;
+.arrow {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  color: var(--text);
+  z-index: 1;
+}
+
+.slider {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE */
+  flex: 1;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
 }

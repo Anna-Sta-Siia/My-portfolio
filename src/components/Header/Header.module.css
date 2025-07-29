@@ -3,16 +3,30 @@
   padding: var(--spacing); 
   background: var(--header-bg);
 }
-.controls {
-  display: flex;
-  flex-wrap: wrap;justify-content: center;gap: 5px;
+.logo{
+  width:20%;
 }
-.controls button,
-.controls select {
+.center {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.right {
+  display: flex;
+  flex-wrap: wrap;justify-content: center;align-items:center;gap: 5px;
+  width: 10%;
+}
+.right button,
+.right select {
   padding: 0.3rem; border-radius: 4px; border: 1px solid var(--text);
   background: var(--cream); cursor: pointer;
 }
-.controls select { appearance: none; }
+.right select { appearance: none; }
 .option{
   font-size: 26px;
   font-family: var(--logo-font);

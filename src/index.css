@@ -14,6 +14,7 @@ body {
   background: var(--bg-color) var(--bg-img) repeat center/150px;
   color: var(--text);
   line-height: 1.5;
+   overflow-x: hidden; 
 }
 
 /* 3. Variables par défaut (light mode) */

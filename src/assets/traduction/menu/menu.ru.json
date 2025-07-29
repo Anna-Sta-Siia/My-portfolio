@@ -3,5 +3,7 @@
   "services": "Услуги",
   "formation": "Образование",
   "contact": "Контакты",
-  "cv": "Резюме"
+  "cv": "Резюме",
+  "linkedin": "LinkedIn",
+  "github": "GitHub"
 }
