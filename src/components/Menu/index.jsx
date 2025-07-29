@@ -22,10 +22,27 @@ const items = [
 export default function Menu() {
   const { language } = useUI();
   const translated = labels[language] || labels.en;
+
   const [index, setIndex] = useState(0);
   const [fade, setFade] = useState(false);
-  const visibleCount = 3;
+  const [visibleCount, setVisibleCount] = useState(3);
 
+  const sliderRef = useRef(null);
+  const petalRef = useRef(null); // pour mesurer un Petal
+
+  // 🔄 défilement automatique
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(true);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % items.length);
+        setFade(false);
+      }, 300);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // ↔️ gestion clics manuels
   const handleScroll = (direction) => {
     setFade(true);
     setTimeout(() => {
@@ -38,26 +55,33 @@ export default function Menu() {
     }, 300);
   };
 
+  // calcule combien de pétales peuvent tenir dans le container
   useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(true);
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % items.length);
-        setFade(false);
-      }, 300);
-    }, 5000); // toutes les 5 secondes
+    function updateVisibleCount() {
+      const containerWidth = sliderRef.current?.offsetWidth;
+      const petalWidth = petalRef.current?.offsetWidth;
 
-    return () => clearInterval(interval);
+      if (containerWidth && petalWidth) {
+        const count = Math.floor(containerWidth / petalWidth);
+        setVisibleCount(count || 1);
+      }
+    }
+
+    updateVisibleCount();
+    window.addEventListener('resize', updateVisibleCount);
+    return () => window.removeEventListener('resize', updateVisibleCount);
   }, []);
 
   return (
     <div className={styles.wrapper}>
       <button className={styles.arrow} onClick={() => handleScroll('left')}>◀</button>
-      <div className={`${styles.slider} ${fade ? styles.fade : ''}`}>
+      
+      <div ref={sliderRef} className={`${styles.slider} ${fade ? styles.fade : ''}`}>
         {Array(visibleCount).fill(0).map((_, i) => {
           const item = items[(index + i) % items.length];
           return (
             <Petal
+              ref={i === 0 ? petalRef : null} // juste le premier pour mesurer
               key={item.key}
               name={translated[item.key] || item.key}
               path={item.path}
@@ -66,6 +90,7 @@ export default function Menu() {
           );
         })}
       </div>
+
       <button className={styles.arrow} onClick={() => handleScroll('right')}>▶</button>
     </div>
   );

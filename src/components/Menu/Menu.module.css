@@ -18,17 +18,14 @@
 
 .slider {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: space-evenly;
+  gap: 1.2em;
   overflow: hidden;
   flex: 1;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
-.fade {
-  opacity: 0;
-}
 
 .slider::-webkit-scrollbar {
   display: none;

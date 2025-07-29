@@ -5,7 +5,7 @@
   background: var(--bg);
   color: var(--text);
   text-decoration: none;
-  border-radius: 24% 76% 0% 100% / 39% 99% 1% 61%  ;
+  border-radius: 40%   ;
   border: 2px solid rgba(0,0,0,0.15);
   box-shadow: 0 3px 6px rgba(0,0,0,0.15);
   transition: transform 0.2s, box-shadow 0.2s;
