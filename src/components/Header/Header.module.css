@@ -1,25 +1,17 @@
 .header {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between; align-items: center;flex-direction: column;
   padding: var(--spacing); 
   background: var(--header-bg);
 }
-.logo{
-  width:20%;
-}
-.center {
-  flex: 1 1 auto;
+.header_up{
   display: flex;
-  justify-content: center;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 0.5rem;
-  min-width: 0;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-
 .right {
   display: flex;
   flex-wrap: wrap;justify-content: center;align-items:center;gap: 5px;
-  width: 10%;
 }
 .right button,
 .right select {
@@ -47,4 +39,12 @@
 
 .icon:hover {
   transform: rotate(10deg) scale(1.1);
+}
+.header_bottom {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  scroll-behavior: smooth;
+  gap: 0.5rem;
+  width: 100%;
 }

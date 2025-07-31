@@ -15,36 +15,47 @@ export default function Accueil({ phase, onFinish }) {
   const { language } = useUI();
   const [flipped, setFlipped] = useState(false);
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
   const translations = { fr: aboutFr, en: aboutEn, ru: aboutRu };
   const about = translations[language] || aboutEn;
 
+  // 🔁 Détection responsive
   useEffect(() => {
-  const alreadyPlayed = sessionStorage.getItem('hasPlayedOnce') === 'true';
-  setHasPlayedOnce(alreadyPlayed);
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 768);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  if (phase === 'medallion' && !alreadyPlayed) {
-    setTimeout(() => setFlipped(true), 500);
-    setTimeout(() => {
-      onFinish?.();
-      setHasPlayedOnce(true);
-      sessionStorage.setItem('hasPlayedOnce', 'true');
-    }, 2500);
-  } else if (phase === 'medallion' && alreadyPlayed) {
-    onFinish?.(); // уже проиграно — не повторять
-  }
-}, [phase, onFinish]);
+  // 🎬 Contrôle de l’animation
+  useEffect(() => {
+    const alreadyPlayed = sessionStorage.getItem('hasPlayedOnce') === 'true';
+    setHasPlayedOnce(alreadyPlayed);
 
-const rotateY =
-  phase === 'app' || hasPlayedOnce
-    ? -180
-    : flipped
-    ? -180
-    : 0;
+    if (phase === 'medallion' && !alreadyPlayed) {
+      setTimeout(() => setFlipped(true), 500);
+      setTimeout(() => {
+        onFinish?.();
+        setHasPlayedOnce(true);
+        sessionStorage.setItem('hasPlayedOnce', 'true');
+      }, 2500);
+    } else if (phase === 'medallion' && alreadyPlayed) {
+      onFinish?.(); // déjà joué — on enchaîne
+    }
+  }, [phase, onFinish]);
+
+  // 🌀 Rotation adaptée à l’écran
+  const animate = isMobile
+    ? { rotateX: flipped || hasPlayedOnce || phase === 'app' ? 180 : 0 }
+    : { rotateY: flipped || hasPlayedOnce || phase === 'app' ? -180 : 0 };
+
   return (
     <section className={styles.accueil}>
       <motion.div
         className={styles.medallion}
-        animate={{ rotateY }}
+        animate={animate}
         transition={{ duration: 1.8, ease: 'easeInOut' }}
       >
         <div className={styles.front}>

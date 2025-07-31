@@ -11,18 +11,13 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
+      <div className={styles.header_up}>
       {/* Gauche : logo */}
-      <div className={styles.logo}>
+      <div className={styles.left}>
         <Link to="/" className={`${styles.logo} logo`}>
           {logoText}
         </Link>
-      </div>
-
-      {/* Centre : le slider de pétales */}
-      <div className={styles.center}>
-        <Menu />
-      </div>
-
+        </div>
       {/* Droite : contrôles */}
       <div className={styles.right}>
         <select
@@ -47,6 +42,11 @@ export default function Header() {
             className={styles.icon}
           />
         </button>
+      </div>
+      </div>
+      {/* Centre : le slider de pétales */}
+      <div className={styles.header_bottom}>
+        <Menu />
       </div>
     </header>
   );

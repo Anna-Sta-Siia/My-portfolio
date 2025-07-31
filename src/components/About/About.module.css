@@ -28,24 +28,9 @@ flex:1;
   font-family: 'Marcellus', 'Georgia', serif; /* ou une fonte style cyrillique stylisée */
   text-shadow: 1px 1px 0 #300000;
 }
-/* ≥ 768px → 18px */
-@media (min-width: 768px) {
-  .about p, .text h2 {
-    font-size: 20px;}
-}
-/* ≥ 875px → 20px */
-@media (min-width: 875px) {
-  .about p, .text h2 {
-    font-size: 23px;}
-}
-/* ≥ 1024px → 24px */
-@media (min-width: 1024px) {
-  .about p, .text h2 {
-    font-size: 28px;
-  }
-}
-@media (min-width: 1240px) {
-  .about p, .text h2 {
-    font-size: 33px;
+/* Responsive */
+@media (max-width: 768px) {
+  .about{
+    width: 50%
   }
 }
